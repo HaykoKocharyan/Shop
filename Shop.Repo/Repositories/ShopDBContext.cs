@@ -5,11 +5,11 @@ namespace Shop.Repo.Repositories
 {
     public class ShopDBContext : DbContext
     {
-        public DbSet<Goods> Goods { get; set; }
-        public DbSet<Suppliers> Suppliers { get; set; }
-        public DbSet<SoldGoods> SoldGoods { get; set; }
-        public DbSet<ReturnedGoods> ReturnedGoods { get; set; }
-        public DbSet<Workers> Workers { get; set; }
+        public DbSet<Good> Goods { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<SoldGood> SoldGoods { get; set; }
+        public DbSet<ReturnedGood> ReturnedGoods { get; set; }
+        public DbSet<Worker> Workers { get; set; }
         public ShopDBContext()
         {
 
@@ -24,7 +24,7 @@ namespace Shop.Repo.Repositories
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Goods>(entity =>
+            modelBuilder.Entity<Good>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -37,7 +37,7 @@ namespace Shop.Repo.Repositories
                 .HasDefaultValueSql("now()")
                 .IsRequired();
             });
-            modelBuilder.Entity<ReturnedGoods>(entity =>
+            modelBuilder.Entity<ReturnedGood>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -50,7 +50,7 @@ namespace Shop.Repo.Repositories
                .HasDefaultValueSql("now()")
                .IsRequired();
             });
-            modelBuilder.Entity<SoldGoods>(entity =>
+            modelBuilder.Entity<SoldGood>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -58,12 +58,12 @@ namespace Shop.Repo.Repositories
                     .HasColumnName("Id")
                     .UseIdentityAlwaysColumn();
 
-                entity.Property(e => e.Sold_Date)
+                entity.Property(e => e.Date)
               .HasColumnType("timestamp")
               .HasDefaultValueSql("now()")
               .IsRequired();
             });
-            modelBuilder.Entity<Suppliers>(entity =>
+            modelBuilder.Entity<Supplier>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -76,7 +76,7 @@ namespace Shop.Repo.Repositories
             .HasDefaultValueSql("now()")
             .IsRequired();
             });
-            modelBuilder.Entity<Workers>(entity =>
+            modelBuilder.Entity<Worker>(entity =>
             {
                 entity.HasKey(e => e.Id);
 

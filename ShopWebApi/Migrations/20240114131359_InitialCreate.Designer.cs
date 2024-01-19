@@ -12,7 +12,7 @@ using Shop.Repo.Repositories;
 namespace ShopWebApi.Migrations
 {
     [DbContext(typeof(ShopDBContext))]
-    [Migration("20231215121014_InitialCreate")]
+    [Migration("20240114131359_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace ShopWebApi.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Shop.Repo.Entities.Goods", b =>
+            modelBuilder.Entity("Shop.Repo.Entities.Good", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,12 +45,11 @@ namespace ShopWebApi.Migrations
                     b.Property<decimal>("Import_Price")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("Product_Name")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("Quantity")
-                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.Property<int>("Supplier_Id")
@@ -66,7 +65,7 @@ namespace ShopWebApi.Migrations
                     b.ToTable("Goods");
                 });
 
-            modelBuilder.Entity("Shop.Repo.Entities.ReturnedGoods", b =>
+            modelBuilder.Entity("Shop.Repo.Entities.ReturnedGood", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +77,7 @@ namespace ShopWebApi.Migrations
                     b.Property<int>("Goods_Id")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Quantity_Returned")
+                    b.Property<int?>("Quantity")
                         .HasColumnType("integer");
 
                     b.Property<string>("Reason")
@@ -92,7 +91,7 @@ namespace ShopWebApi.Migrations
                         .HasColumnType("timestamp")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<double?>("Weight_Kg_Returned")
+                    b.Property<double?>("Weight_Kg")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
@@ -102,7 +101,7 @@ namespace ShopWebApi.Migrations
                     b.ToTable("ReturnedGoods");
                 });
 
-            modelBuilder.Entity("Shop.Repo.Entities.SoldGoods", b =>
+            modelBuilder.Entity("Shop.Repo.Entities.SoldGood", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,24 +110,24 @@ namespace ShopWebApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Goods_Id")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("Quantity_Sold")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("Sale_Price")
-                        .HasColumnType("numeric");
-
-                    b.Property<DateTime>("Sold_Date")
+                    b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp")
                         .HasDefaultValueSql("now()");
 
+                    b.Property<int>("Goods_Id")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("integer");
+
                     b.Property<decimal>("Total_Price")
                         .HasColumnType("numeric");
 
-                    b.Property<double?>("Weight_Sold")
+                    b.Property<double?>("Weight_KG")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
@@ -138,7 +137,7 @@ namespace ShopWebApi.Migrations
                     b.ToTable("SoldGoods");
                 });
 
-            modelBuilder.Entity("Shop.Repo.Entities.Suppliers", b =>
+            modelBuilder.Entity("Shop.Repo.Entities.Supplier", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,6 +145,9 @@ namespace ShopWebApi.Migrations
                         .HasColumnName("Id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
 
                     b.Property<string>("Contact_Person")
                         .HasColumnType("text");
@@ -155,17 +157,14 @@ namespace ShopWebApi.Migrations
                         .HasColumnType("timestamp")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<string>("Supplier_Address")
+                    b.Property<string>("Email")
                         .HasColumnType("text");
 
-                    b.Property<string>("Supplier_Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Supplier_Name")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Supplier_Phone")
+                    b.Property<string>("Phone")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -173,7 +172,7 @@ namespace ShopWebApi.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("Shop.Repo.Entities.Workers", b =>
+            modelBuilder.Entity("Shop.Repo.Entities.Worker", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -182,8 +181,31 @@ namespace ShopWebApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Adress")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Last_Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("text");
+
+                    b.Property<decimal?>("Salary")
+                        .HasColumnType("numeric");
 
                     b.Property<DateTime?>("Work_End_Date")
                         .HasColumnType("timestamp with time zone");
@@ -193,40 +215,15 @@ namespace ShopWebApi.Migrations
                         .HasColumnType("timestamp")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<string>("Worker_Adress")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Worker_Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Worker_LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Worker_Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Worker_Phone")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Worker_Position")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal?>("Worker_Salary")
-                        .IsRequired()
-                        .HasColumnType("numeric");
-
                     b.HasKey("Id");
 
                     b.ToTable("Workers");
                 });
 
-            modelBuilder.Entity("Shop.Repo.Entities.Goods", b =>
+            modelBuilder.Entity("Shop.Repo.Entities.Good", b =>
                 {
-                    b.HasOne("Shop.Repo.Entities.Suppliers", "Supplier")
-                        .WithMany()
+                    b.HasOne("Shop.Repo.Entities.Supplier", "Supplier")
+                        .WithMany("Goods")
                         .HasForeignKey("Supplier_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -234,9 +231,9 @@ namespace ShopWebApi.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("Shop.Repo.Entities.ReturnedGoods", b =>
+            modelBuilder.Entity("Shop.Repo.Entities.ReturnedGood", b =>
                 {
-                    b.HasOne("Shop.Repo.Entities.Goods", "Goods")
+                    b.HasOne("Shop.Repo.Entities.Good", "Goods")
                         .WithMany()
                         .HasForeignKey("Goods_Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -245,14 +242,19 @@ namespace ShopWebApi.Migrations
                     b.Navigation("Goods");
                 });
 
-            modelBuilder.Entity("Shop.Repo.Entities.SoldGoods", b =>
+            modelBuilder.Entity("Shop.Repo.Entities.SoldGood", b =>
                 {
-                    b.HasOne("Shop.Repo.Entities.Goods", "Goods")
+                    b.HasOne("Shop.Repo.Entities.Good", "Goods")
                         .WithMany()
                         .HasForeignKey("Goods_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Goods");
+                });
+
+            modelBuilder.Entity("Shop.Repo.Entities.Supplier", b =>
+                {
                     b.Navigation("Goods");
                 });
 #pragma warning restore 612, 618

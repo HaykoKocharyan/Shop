@@ -8,11 +8,11 @@ namespace Shop.Repo.Models
 {
     public class SoldGoodsModel
     {
-        public  string Product_Name { get; set; }
-        public string Supplier_Name { get; set; }
+        public string Product_Name { get; set; } = null!;
+        public string Supplier_Name { get; set; } = null!;
         public decimal Sale_Price { get; set; }
-        public int? Quantity_Sold { get; set; }
-        public double? Weight_Sold_KG { get; set; }
+        public int? Quantity { get; set; }
+        public double? Weight_KG { get; set; }
         public decimal Total_Price { get; set; }
     }
 }

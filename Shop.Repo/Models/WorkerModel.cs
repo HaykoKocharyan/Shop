@@ -13,13 +13,13 @@ namespace Shop.Repo.Models
 {
     public class WorkerModel
     {
-        public string Worker_Name { get; set; }
-        public string Worker_LastName { get; set; }
-        public string? Worker_Position { get; set; }
-        public decimal? Worker_Salary { get; set; }
-        public string? Worker_Email { get; set; }
-        public string? Worker_Phone { get; set; }
-        public string? Worker_Adress { get; set; }
+        public string Name { get; set; } = null!;
+        public string Last_Name { get; set; } = null!;
+        public string? Position { get; set; }
+        public decimal? Salary { get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
+        public string? Adress { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime? Work_End_Date { get; set; }
     }

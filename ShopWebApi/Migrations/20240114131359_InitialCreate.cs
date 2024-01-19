@@ -18,11 +18,11 @@ namespace ShopWebApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
-                    Supplier_Name = table.Column<string>(type: "character varying", nullable: false),
+                    Name = table.Column<string>(type: "character varying", nullable: false),
                     Contact_Person = table.Column<string>(type: "character varying", nullable: true),
-                    Supplier_Email = table.Column<string>(type: "character varying", nullable: true),
-                    Supplier_Phone = table.Column<string>(type: "character varying", nullable: true),
-                    Supplier_Address = table.Column<string>(type: "character varying", nullable: true),
+                    Email = table.Column<string>(type: "character varying", nullable: true),
+                    Phone = table.Column<string>(type: "character varying", nullable: true),
+                    Address = table.Column<string>(type: "character varying", nullable: true),
                     Created_Date = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
@@ -36,16 +36,16 @@ namespace ShopWebApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
-                    Worker_Name = table.Column<string>(type: "character varying", nullable: false),
-                    Worker_LastName = table.Column<string>(type: "character varying", nullable: false),
-                    Worker_Position = table.Column<string>(type: "character varying", nullable: false),
-                    Worker_Salary = table.Column<decimal>(type: "numeric", nullable: false),
-                    Worker_Email = table.Column<string>(type: "character varying", nullable: true),
-                    Worker_Phone = table.Column<string>(type: "character varying", nullable: true),
-                    Worker_Adress = table.Column<string>(type: "character varying", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    Name = table.Column<string>(type: "character varying", nullable: false),
+                    Last_Name = table.Column<string>(type: "character varying", nullable: false),
+                    Position = table.Column<string>(type: "character varying", nullable: true),
+                    Salary = table.Column<decimal>(type: "numeric", nullable: true),
+                    Email = table.Column<string>(type: "character varying", nullable: true),
+                    Phone = table.Column<string>(type: "character varying", nullable: true),
+                    Adress = table.Column<string>(type: "character varying", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Work_Start_Date = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()"),
-                    Work_End_Date = table.Column<DateTime>(type: "timestamp", nullable: true)
+                    Work_End_Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,9 +58,9 @@ namespace ShopWebApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
-                    Product_Name = table.Column<string>(type: "character varying", nullable: false),
+                    Name = table.Column<string>(type: "character varying", nullable: false),
                     Import_Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: true),
                     Weight_KG = table.Column<double>(type: "double precision", nullable: true),
                     Category = table.Column<string>(type: "character varying", nullable: true),
                     Created_Date = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()"),
@@ -84,8 +84,8 @@ namespace ShopWebApi.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
                     Reason = table.Column<string>(type: "character varying", nullable: true),
-                    Quantity_Returned = table.Column<int>(type: "integer", nullable: true),
-                    Weight_Kg_Returned = table.Column<double>(type: "double precision", nullable: true),
+                    Quantity = table.Column<int>(type: "integer", nullable: true),
+                    Weight_Kg = table.Column<double>(type: "double precision", nullable: true),
                     Refund_Amount = table.Column<decimal>(type: "numeric", nullable: true),
                     Return_Date = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()"),
                     Goods_Id = table.Column<int>(type: "integer", nullable: false)
@@ -108,11 +108,11 @@ namespace ShopWebApi.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
                     Goods_Id = table.Column<int>(type: "integer", nullable: false),
-                    Sale_Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    Quantity_Sold = table.Column<int>(type: "integer", nullable: true),
-                    Weight_Sold = table.Column<double>(type: "double precision", nullable: true),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: true),
+                    Weight_KG = table.Column<double>(type: "double precision", nullable: true),
                     Total_Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    Sold_Date = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()")
+                    Date = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {

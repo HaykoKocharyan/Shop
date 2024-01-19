@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Shop.Repo.Entities
 {
-    public class ReturnedGoods
+    public class ReturnedGood
     {
         public int Id { get; set; }
         public string? Reason { get; set; }
-        public int? Quantity_Returned { get; set; }
-        public double? Weight_Kg_Returned { get; set; }
+        public int? Quantity { get; set; }
+        public double? Weight_Kg { get; set; }
         public decimal? Refund_Amount { get; set; }
         public DateTime Return_Date { get; set; }
 
         public int Goods_Id { get; set; }
         [ForeignKey("Goods_Id")]
-        public Goods Goods { get; set; }
+        public Good Goods { get; set; } = null!;
     }
 }

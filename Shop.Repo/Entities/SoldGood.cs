@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Shop.Repo.Entities
 {
-    public class SoldGoods
+    public class SoldGood
     {
         public int Id { get; set; }
         public int Goods_Id { get; set; }
         [ForeignKey("Goods_Id")]
-        public Goods Goods { get; set; }
-        public decimal Sale_Price { get; set; }
-        public int? Quantity_Sold { get; set; }
-        public double? Weight_Sold { get; set; }
+        public Good Goods { get; set; } = null!;
+        public decimal Price { get; set; }
+        public int? Quantity { get; set; }
+        public double? Weight_KG { get; set; }
         public decimal Total_Price { get; set; }
-        public DateTime Sold_Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

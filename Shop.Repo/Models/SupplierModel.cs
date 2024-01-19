@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,10 +9,12 @@ namespace Shop.Repo.Models
 {
     public class SupplierModel
     {
-        public string Supplier_Name { get; set; }
+        public string Name { get; set; } = null!;
         public string? Contact_Person { get; set; }
-        public string? Supplier_Email { get; set; }
-        public string? Supplier_Phone { get; set; }
-        public string? Supplier_Address { get; set; }
+
+        [EmailAddress(ErrorMessage ="Invalid Email Format")]
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
+        public string? Address { get; set; }
     }
 }
