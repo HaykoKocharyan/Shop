@@ -13,9 +13,9 @@ namespace Shop.Service.Services
             this.goodRepository = goodRepository;
         }
 
-        public async Task AddGoods(GoodsModel goodsModel)
+        public async Task AddGoods(AddGoodsModel addGoodsModel)
         {
-            await goodRepository.AddGoods(goodsModel);
+            await goodRepository.AddGoods(addGoodsModel);
         }
 
         public async Task DeleteProduct(int productId)
@@ -23,9 +23,9 @@ namespace Shop.Service.Services
             await goodRepository.DeleteProduct(productId);
         }
 
-        public async Task EditProduct(int productId, GoodsModel goodsModel)
+        public async Task EditProduct(int productId, EditGoodsModel editGoodsModel)
         {
-            await goodRepository.EditProduct(productId, goodsModel);
+            await goodRepository.EditProduct(productId, editGoodsModel);
         }
 
         public async Task<dynamic> SelectGoods()

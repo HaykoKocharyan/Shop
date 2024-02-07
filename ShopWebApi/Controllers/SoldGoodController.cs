@@ -23,7 +23,7 @@ namespace ShopWebApi.Controllers
                 try
                 {
                     await soldGoodService.SellProduct(soldGoodsModel);
-                    return Ok("Supplier Added successfully");
+                    return Ok("Product Sold Successfully");
                 }
                 catch (Exception ex)
                 {

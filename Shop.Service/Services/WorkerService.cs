@@ -1,12 +1,6 @@
 ﻿using Shop.Repo.Abstractions;
 using Shop.Repo.Models;
-using Shop.Repo.Repositories;
 using Shop.Service.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.Service.Services
 {

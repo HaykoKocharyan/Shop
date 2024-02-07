@@ -5,11 +5,11 @@ namespace Shop.Repo.Abstractions
 {
     public interface IGoodRepository
     {
-        Task AddGoods(GoodsModel goodsModel);
+        Task AddGoods(AddGoodsModel addGoodsModel);
 
         List<Good> SelectGoods();
 
-        Task EditProduct(int productId, GoodsModel goodsModel);
+        Task EditProduct(int productId, EditGoodsModel editgoodsModel);
 
         Task DeleteProduct(int productId);
     }

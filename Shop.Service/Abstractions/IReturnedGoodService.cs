@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Shop.Repo.Models;
 
 namespace Shop.Service.Abstractions
 {
     public interface IReturnedGoodService
     {
+        Task ReturnGood(ReturnGoodModel returnGoodModel);
     }
 }

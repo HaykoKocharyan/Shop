@@ -13,23 +13,23 @@ namespace Shop.Repo.Repositories
             this.dbContext = dbContext;
         }
 
-        public async Task AddGoods(GoodsModel goodsModel)
+        public async Task AddGoods(AddGoodsModel addGoodsModel)
         {
-            var existingSupplier = await dbContext.Suppliers.FirstOrDefaultAsync(s => s.Name == goodsModel.Supplier_Name);
+            var existingSupplier = await dbContext.Suppliers.FirstOrDefaultAsync(s => s.Id == addGoodsModel.Supplier_Id);
 
             if (existingSupplier != null)
             {
-                var existingProduct = await dbContext.Goods.FirstOrDefaultAsync(g => g.Name == goodsModel.Product_Name && g.Supplier_Id == existingSupplier.Id);
+                var existingProduct = await dbContext.Goods.FirstOrDefaultAsync(g => g.Name == addGoodsModel.Product_Name && g.Supplier_Id == existingSupplier.Id);
 
                 if (existingProduct != null)
                 {
-                    if (goodsModel.Quantity != null)
+                    if (addGoodsModel.Quantity != null)
                     {
-                        existingProduct.Quantity += goodsModel.Quantity;
+                        existingProduct.Quantity += addGoodsModel.Quantity;
                     }
-                    else if (goodsModel.Weight_KG != null)
+                    else if (addGoodsModel.Weight_KG != null)
                     {
-                        existingProduct.Weight_KG += goodsModel.Weight_KG;
+                        existingProduct.Weight_KG += addGoodsModel.Weight_KG;
                     }
 
                     await dbContext.SaveChangesAsync();
@@ -38,11 +38,11 @@ namespace Shop.Repo.Repositories
                 {
                     Good newGoods = new Good
                     {
-                        Name = goodsModel.Product_Name,
-                        Import_Price = goodsModel.Import_Price,
-                        Quantity = goodsModel.Quantity,
-                        Weight_KG = goodsModel.Weight_KG,
-                        Category = goodsModel.Category,
+                        Name = addGoodsModel.Product_Name,
+                        Import_Price = addGoodsModel.Import_Price,
+                        Quantity = addGoodsModel.Quantity,
+                        Weight_KG = addGoodsModel.Weight_KG,
+                        Category = addGoodsModel.Category,
                         Supplier_Id = existingSupplier.Id
                     };
                     dbContext.Goods.Add(newGoods);
@@ -51,7 +51,7 @@ namespace Shop.Repo.Repositories
             }
             else
             {
-                throw new InvalidOperationException($"Supplier with the name {goodsModel.Supplier_Name} does not exist. Please Add Supplier at first");
+                throw new InvalidOperationException($"Supplier with Id {addGoodsModel.Supplier_Id} does not exist. Please Add Supplier at first");
             }
         }
 
@@ -70,17 +70,17 @@ namespace Shop.Repo.Repositories
             }
         }
 
-        public async Task EditProduct(int productId, GoodsModel goodsModel)
+        public async Task EditProduct(int productId, EditGoodsModel editGoodsModel)
         {
             var existingProduct = await dbContext.Goods.FirstOrDefaultAsync(s => s.Id == productId);
 
             if (existingProduct != null)
             {
-                var productProperties = typeof(GoodsModel).GetProperties();
+                var productProperties = typeof(EditGoodsModel).GetProperties();
 
                 foreach (var property in productProperties)
                 {
-                    var newValue = property.GetValue(goodsModel);
+                    var newValue = property.GetValue(editGoodsModel);
                     if (newValue != null)
                     {
                         var existingValue = property.GetValue(existingProduct);

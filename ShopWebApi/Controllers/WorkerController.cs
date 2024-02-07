@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Repo.Models;
-using Shop.Service;
 using Shop.Service.Abstractions;
 
 namespace ShopWebApi.Controllers

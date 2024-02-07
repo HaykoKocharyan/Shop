@@ -1,5 +1,4 @@
-﻿
-using Shop.Repo.Models;
+﻿using Shop.Repo.Models;
 
 namespace Shop.Service.Abstractions
 {

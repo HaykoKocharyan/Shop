@@ -23,10 +23,12 @@ namespace ShopWebApi
             builder.Services.AddScoped<ISoldGoodService, SoldGoodService>();
             builder.Services.AddScoped<ISupplierService, SupplierService>();
             builder.Services.AddScoped<IWorkerService, WorkerService>();
+            builder.Services.AddScoped<IReturnedGoodService, ReturnedGoodService>();
             builder.Services.AddScoped<IGoodRepository, GoodRepository>();
             builder.Services.AddScoped<ISoldGoodRepository, SoldGoodRepository>();
             builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
             builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
+            builder.Services.AddScoped<IReturnedGoodRepository, ReturnedGoodRepository>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

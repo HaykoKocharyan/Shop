@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -78,30 +77,6 @@ namespace ShopWebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReturnedGoods",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
-                    Reason = table.Column<string>(type: "character varying", nullable: true),
-                    Quantity = table.Column<int>(type: "integer", nullable: true),
-                    Weight_Kg = table.Column<double>(type: "double precision", nullable: true),
-                    Refund_Amount = table.Column<decimal>(type: "numeric", nullable: true),
-                    Return_Date = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()"),
-                    Goods_Id = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ReturnedGoods", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ReturnedGoods_Goods_Goods_Id",
-                        column: x => x.Goods_Id,
-                        principalTable: "Goods",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SoldGoods",
                 columns: table => new
                 {
@@ -125,15 +100,39 @@ namespace ShopWebApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ReturnedGoods",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
+                    Reason = table.Column<string>(type: "character varying", nullable: true),
+                    Quantity = table.Column<int>(type: "integer", nullable: true),
+                    Weight_Kg = table.Column<double>(type: "double precision", nullable: true),
+                    Refund_Amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    Return_Date = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()"),
+                    SoldGood_Id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReturnedGoods", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ReturnedGoods_SoldGoods_SoldGood_Id",
+                        column: x => x.SoldGood_Id,
+                        principalTable: "SoldGoods",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Goods_Supplier_Id",
                 table: "Goods",
                 column: "Supplier_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReturnedGoods_Goods_Id",
+                name: "IX_ReturnedGoods_SoldGood_Id",
                 table: "ReturnedGoods",
-                column: "Goods_Id");
+                column: "SoldGood_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SoldGoods_Goods_Id",
@@ -148,10 +147,10 @@ namespace ShopWebApi.Migrations
                 name: "ReturnedGoods");
 
             migrationBuilder.DropTable(
-                name: "SoldGoods");
+                name: "Workers");
 
             migrationBuilder.DropTable(
-                name: "Workers");
+                name: "SoldGoods");
 
             migrationBuilder.DropTable(
                 name: "Goods");

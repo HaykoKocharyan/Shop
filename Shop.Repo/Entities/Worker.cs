@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Shop.Repo.Entities
+﻿namespace Shop.Repo.Entities
 {
     public class Worker
     {

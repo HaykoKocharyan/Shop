@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Repo.Models;
-using Shop.Service;
 using Shop.Service.Abstractions;
 
 namespace ShopWebApi.Controllers
@@ -42,21 +41,28 @@ namespace ShopWebApi.Controllers
         }
 
         [HttpPut("EditSupplier")]
-        public async Task<IActionResult> EditSupplier(int supplierId,SupplierModel supplierModel)
+        public async Task<IActionResult> EditSupplier(int supplierId, SupplierModel supplierModel)
         {
-            try
+            if (supplierModel != null)
             {
-                await supplierService.EditSupplier(supplierId, supplierModel);
-                return Ok("Supplier updated successfully");
+                try
+                {
+                    await supplierService.EditSupplier(supplierId, supplierModel);
+                    return Ok("Supplier updated successfully");
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Failed to update supplier: {ex.Message}");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest($"Failed to update supplier: {ex.Message}");
+                return BadRequest("Fill data correct");
             }
         }
 
         [HttpDelete("DeleteSupplier")]
-        public async Task<IActionResult> DeleteSupplier(int supplierId)
+        public async Task<IActionResult> DeleteSupplier([FromBody] int supplierId)
         {
             try
             {

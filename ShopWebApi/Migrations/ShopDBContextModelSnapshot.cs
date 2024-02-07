@@ -71,16 +71,13 @@ namespace ShopWebApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Goods_Id")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("Quantity")
                         .HasColumnType("integer");
 
                     b.Property<string>("Reason")
                         .HasColumnType("text");
 
-                    b.Property<decimal?>("Refund_Amount")
+                    b.Property<decimal>("Refund_Amount")
                         .HasColumnType("numeric");
 
                     b.Property<DateTime>("Return_Date")
@@ -88,12 +85,15 @@ namespace ShopWebApi.Migrations
                         .HasColumnType("timestamp")
                         .HasDefaultValueSql("now()");
 
+                    b.Property<int>("SoldGood_Id")
+                        .HasColumnType("integer");
+
                     b.Property<double?>("Weight_Kg")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Goods_Id");
+                    b.HasIndex("SoldGood_Id");
 
                     b.ToTable("ReturnedGoods");
                 });
@@ -230,13 +230,13 @@ namespace ShopWebApi.Migrations
 
             modelBuilder.Entity("Shop.Repo.Entities.ReturnedGood", b =>
                 {
-                    b.HasOne("Shop.Repo.Entities.Good", "Goods")
+                    b.HasOne("Shop.Repo.Entities.SoldGood", "SoldGood")
                         .WithMany()
-                        .HasForeignKey("Goods_Id")
+                        .HasForeignKey("SoldGood_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Goods");
+                    b.Navigation("SoldGood");
                 });
 
             modelBuilder.Entity("Shop.Repo.Entities.SoldGood", b =>

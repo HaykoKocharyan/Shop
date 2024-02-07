@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Repo.Models;
-using Shop.Service;
 using Shop.Service.Abstractions;
 
 namespace ShopWebApi.Controllers
@@ -16,12 +15,12 @@ namespace ShopWebApi.Controllers
         }
 
         [HttpPost("AddProduct")]
-        public async Task<IActionResult> AddGoods(GoodsModel goodsModel)
+        public async Task<IActionResult> AddGoods(AddGoodsModel addgoodsModel)
         {
-            if (goodsModel != null)
+            if (addgoodsModel != null)
             {
-                await goodService.AddGoods(goodsModel);
-                return Ok("Goods added successfully");
+                await goodService.AddGoods(addgoodsModel);
+                return Ok("Product added successfully");
             }
             else
                 return BadRequest("Please Fill Data");
@@ -34,11 +33,11 @@ namespace ShopWebApi.Controllers
         }
 
         [HttpPut("EditProduct")]
-        public async Task<IActionResult> EditProduct(int productId, [FromQuery] GoodsModel goodsModel)
+        public async Task<IActionResult> EditProduct(int productId,EditGoodsModel editGoodsModel)
         {
             try
             {
-                await goodService.EditProduct(productId, goodsModel);
+                await goodService.EditProduct(productId, editGoodsModel);
                 return Ok("Product updated successfully");
             }
             catch (Exception ex)
@@ -48,7 +47,7 @@ namespace ShopWebApi.Controllers
         }
 
         [HttpDelete("DeleteProduct")]
-        public async Task<IActionResult> DeleteProduct(int productId)
+        public async Task<IActionResult> DeleteProduct([FromBody] int productId)
         {
             try
             {

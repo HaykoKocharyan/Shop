@@ -2,11 +2,6 @@
 using Shop.Repo.Abstractions;
 using Shop.Repo.Entities;
 using Shop.Repo.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.Repo.Repositories
 {
@@ -26,7 +21,7 @@ namespace Shop.Repo.Repositories
 
             if (existingProduct != null && existingSupplier != null)
             {
-                if (existingProduct.Quantity != null && soldGoodsModel.Quantity != null)
+                if (existingProduct.Quantity != 0 && soldGoodsModel.Quantity != 0)
                 {
                     if (existingProduct.Quantity >= soldGoodsModel.Quantity)
                     {
@@ -38,7 +33,7 @@ namespace Shop.Repo.Repositories
                     }
                 }
 
-                else if (existingProduct.Weight_KG != null && soldGoodsModel.Weight_KG != null)
+                else if (existingProduct.Weight_KG != 0 && soldGoodsModel.Weight_KG != 0)
                 {
                     if (existingProduct.Weight_KG >= soldGoodsModel.Weight_KG)
                     {
